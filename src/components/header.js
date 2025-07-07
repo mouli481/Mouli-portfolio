@@ -16,6 +16,7 @@ export default function Header() {
   useEffect(() => {
     const checkIsMobile = () => {
       setIsMobile(window.innerWidth < 768);
+      if (window.innerWidth >= 768) setIsMenuOpen(false); // Close menu on desktop
     };
     checkIsMobile();
     window.addEventListener("resize", checkIsMobile);
@@ -25,72 +26,88 @@ export default function Header() {
   const linkBaseStyle = {
     color: "#ffffff",
     textDecoration: "none",
-    fontSize: "1.1rem",
+    fontSize: isMobile ? "0.875rem" : "1rem",
     fontWeight: "600",
-    padding: "0.5rem 1rem",
-    borderRadius: "8px",
-    background: "rgba(255,255,255,0.1)",
+    padding: isMobile ? "0.5rem 1.25rem" : "0.5rem 1.5rem",
+    borderRadius: "10px",
+    background: "rgba(255, 255, 255, 0.15)",
     transition: "all 0.3s ease",
-    display: "inline-block",
-    marginBottom: isMobile ? "1rem" : 0,
+    display: "block",
+    textAlign: "center",
+    width: "100%",
+    boxSizing: "border-box",
   };
 
   const linkHoverStyle = {
-    background: "rgba(255,255,255,0.2)",
+    background: "rgba(255, 255, 255, 0.25)",
     color: "#facc15",
+    transform: "scale(1.05)",
   };
 
   return (
     <motion.header
       initial={{ y: -100 }}
       animate={{ y: 0 }}
-      transition={{ duration: 0.5 }}
+      transition={{ duration: 0.5, ease: "easeOut" }}
       style={{
         position: "fixed",
         top: 0,
         width: "100%",
+        maxWidth: "100%",
         zIndex: 1000,
-        padding: "1rem 0rem",
-        background: "linear-gradient(135deg, rgba(30,64,175,0.85), rgba(59,130,246,0.85))",
-        backdropFilter: "blur(10px)",
-        boxShadow: "0 4px 10px rgba(0, 0, 0, 0.3)",
+        padding: isMobile ? "0.75rem" : "1rem",
+        background: "linear-gradient(135deg, rgba(30, 64, 175, 0.9), rgba(59, 130, 246, 0.9))",
+        backdropFilter: "blur(12px)",
+        boxShadow: "0 4px 15px rgba(0, 0, 0, 0.4)",
+        boxSizing: "border-box",
+        overflowX: "hidden",
       }}
     >
       <div
         style={{
           maxWidth: "1280px",
+          width: "100%",
           margin: "0 auto",
+          padding: isMobile ? "0 1rem" : "0 1.5rem",
           display: "flex",
           justifyContent: "space-between",
           alignItems: "center",
-          flexWrap: "wrap",
+          boxSizing: "border-box",
+          overflowX: "hidden",
         }}
       >
         {/* Left section: Menu + Logo */}
-        <div style={{ display: "flex", alignItems: "center", gap: "1rem" }}>
+        <div style={{ display: "flex", alignItems: "center", gap: "0.75rem" }}>
           {isMobile && (
-            <button
+            <motion.button
+              whileHover={{ scale: 1.1 }}
+              whileTap={{ scale: 0.9 }}
               onClick={() => setIsMenuOpen(!isMenuOpen)}
               style={{
                 background: "transparent",
                 border: "none",
                 color: "#ffffff",
-                fontSize: "2rem",
+                fontSize: "1.5rem",
                 cursor: "pointer",
+                padding: "0.5rem",
+                borderRadius: "8px",
+                transition: "background 0.3s ease",
               }}
+              aria-label={isMenuOpen ? "Close menu" : "Open menu"}
             >
               {isMenuOpen ? "✕" : "☰"}
-            </button>
+            </motion.button>
           )}
 
           <motion.h1
             initial={{ opacity: 0, x: -20 }}
             animate={{ opacity: 1, x: 0 }}
+            transition={{ duration: 0.5 }}
             style={{
-              fontSize: "1.8rem",
+              fontSize: isMobile ? "1.25rem" : "1.5rem",
               fontWeight: "800",
               color: "#ffffff",
-              textShadow: "0 2px 8px rgba(0,0,0,0.2)",
+              textShadow: "0 2px 8px rgba(0, 0, 0, 0.3)",
             }}
           >
             Mouli<span style={{ color: "#facc15" }}> Portfolio</span>
@@ -102,7 +119,7 @@ export default function Header() {
           <ul
             style={{
               display: "flex",
-              gap: "2rem",
+              gap: isMobile ? "1rem" : "1.5rem",
               listStyle: "none",
               margin: 0,
               padding: 0,
@@ -114,12 +131,15 @@ export default function Header() {
                 initial={{ opacity: 0, y: -10 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: idx * 0.1 }}
+                style={{ boxSizing: "border-box" }}
               >
                 <Link
                   href={item.path}
                   style={linkBaseStyle}
                   onMouseOver={(e) => Object.assign(e.target.style, linkHoverStyle)}
                   onMouseOut={(e) => Object.assign(e.target.style, linkBaseStyle)}
+                  onFocus={(e) => Object.assign(e.target.style, linkHoverStyle)}
+                  onBlur={(e) => Object.assign(e.target.style, linkBaseStyle)}
                 >
                   {item.name}
                 </Link>
@@ -133,25 +153,30 @@ export default function Header() {
       <AnimatePresence>
         {isMobile && isMenuOpen && (
           <motion.ul
-            initial={{ height: 0, opacity: 0 }}
-            animate={{ height: "auto", opacity: 1 }}
-            exit={{ height: 0, opacity: 0 }}
-            transition={{ duration: 0.3 }}
+            initial={{ y: "-100%", opacity: 0 }}
+            animate={{ y: 0, opacity: 1 }}
+            exit={{ y: "-100%", opacity: 0 }}
+            transition={{ duration: 0.4, ease: "easeInOut" }}
             style={{
-              listStyle: "none",
-              padding: "1rem 2rem",
-              marginTop: "1rem",
-              background: "linear-gradient(135deg, #1e40af, #3b82f6)",
-              borderRadius: "0 0 12px 12px",
-              boxShadow: "0 4px 10px rgba(0, 0, 0, 0.3)",
+              width: "100%",
+              maxWidth: "100%",
+              padding: "1.25rem",
+              margin: 0,
+              background: "linear-gradient(135deg, rgba(30, 64, 175, 0.95), rgba(59, 130, 246, 0.95))",
+              backdropFilter: "blur(10px)",
+              borderRadius: "0 0 16px 16px",
+              boxShadow: "0 6px 15px rgba(0, 0, 0, 0.3)",
+              overflow: "hidden",
+              boxSizing: "border-box",
             }}
           >
             {navItems.map((item, idx) => (
               <motion.li
                 key={idx}
-                initial={{ opacity: 0, x: -20 }}
+                initial={{ opacity: 0, x: -30 }}
                 animate={{ opacity: 1, x: 0 }}
-                transition={{ delay: 0.1 * idx }}
+                transition={{ delay: 0.1 * idx + 0.2, duration: 0.3 }}
+                style={{ marginBottom: "0.5rem", boxSizing: "border-box" }}
               >
                 <Link
                   href={item.path}
@@ -159,6 +184,8 @@ export default function Header() {
                   style={linkBaseStyle}
                   onMouseOver={(e) => Object.assign(e.target.style, linkHoverStyle)}
                   onMouseOut={(e) => Object.assign(e.target.style, linkBaseStyle)}
+                  onFocus={(e) => Object.assign(e.target.style, linkHoverStyle)}
+                  onBlur={(e) => Object.assign(e.target.style, linkBaseStyle)}
                 >
                   {item.name}
                 </Link>
