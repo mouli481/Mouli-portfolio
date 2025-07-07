@@ -50,7 +50,7 @@ export default function Header() {
         top: 0,
         width: "100%",
         zIndex: 1000,
-        padding: "1rem 2rem",
+        padding: "1rem 0rem",
         background: "linear-gradient(135deg, rgba(30,64,175,0.85), rgba(59,130,246,0.85))",
         backdropFilter: "blur(10px)",
         boxShadow: "0 4px 10px rgba(0, 0, 0, 0.3)",

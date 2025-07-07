@@ -76,17 +76,18 @@ export default function Home() {
           variants={itemVariants}
           style={{ textAlign: "center", marginBottom: "2rem" }}
         >
-          <Image
-            src="/My-photo.jfif"
-            alt="Mouli Reddy"
-            width={150}
-            height={150}
-            style={{
-              borderRadius: "50%",
-              border: "4px solid #38bdf8",
-              boxShadow: "0 0 10px rgba(59,130,246,0.6)",
-              objectFit: "cover"
-            }}
+         <Image
+  src="/my-photo.jfif"
+  alt="Mouli Reddy"
+  width={150}
+  height={150}
+  style={{
+    borderRadius: "50%",
+    border: "4px solid #38bdf8",
+    boxShadow: "0 0 10px rgba(59,130,246,0.6)",
+    objectFit: "cover"
+  }}
+
           />
           <h1 style={{
             fontSize: "2rem",
