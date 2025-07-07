@@ -30,7 +30,7 @@ const resumeData = {
   ],
   profileSummary: [
     "Strong proficiency in JavaScript and jQuery, including DOM manipulation and JavaScript object model.",
-    " Developing new user-facing features and reusable components using React.js, React-hooks, react-context.",
+    "Developing new user-facing features and reusable components using React.js, React-hooks, react-context.",
     "Good experience in state management using Redux.",
     "Good knowledge on event handling using Redux-thunk.",
     "Hands-on experience in ES6 features.",
@@ -65,7 +65,7 @@ const resumeData = {
   keyResultAreas: [
     "Developing software solutions by studying information needs, conferring with users, studying systems flow, data usage, and work processes.",
     "Understanding process requirements, providing use cases for business, functional & technical requirements.",
-    "добро пожаловать delivery frameworks & new technology implementation projects for streamlining related activities as per quality standards.",
+    "Working on delivery frameworks & new technology implementation projects for streamlining related activities as per quality standards.",
     "Participating in requirements gathering for enhancements and creation of high-level & detailed-level design documents.",
     "Advancing solutions for given technical specifications; installing application software and deploying customizations; contributing to code reviews.",
     "Liaising with stakeholders during problem solving, requirements gathering, detailed level design, development, system test, and production implementation.",
@@ -110,19 +110,6 @@ const resumeData = {
   ],
   projects: [
     {
-      title: "Freestyle Libre",
-      client: "Abbott",
-      tools: ["HTML5", "CSS3", "Sass", "Bootstrap", "JavaScript", "jQuery"],
-      description:
-        "Abbott is a global healthcare leader that helps people live more fully at all stages of life. Our portfolio of life-changing technologies spans the spectrum of healthcare, with leading businesses and products in diagnostics, medical devices, nutritionals, and branded generic medicines. Our 103,100 colleagues serve people in more than 160 countries.",
-      role: [
-        "Designing and developing responsive React components.",
-        "Taking ownership of both enhancement and maintenance.",
-        "Involve in sprint planning and grooming stories.",
-        "Code review and code optimization.",
-      ],
-    },
-    {
       title: "CAT Fleet Management",
       client: "Caterpillar",
       tools: [
@@ -144,11 +131,11 @@ const resumeData = {
       description:
         "This application shows the expected time of completion, the technician’s name and contact who is doing the maintenance/repair activity, and once the job completes, the dealer could send survey and rating details maintained in the application.",
       role: [
-        "Designing and developing responsive React components.",
-        "Taking ownership of both enhancement and maintenance.",
-        "Involve in sprint planning and grooming stories.",
-        "Code review and code optimization.",
-        "Deployment and production support.",
+        "Designed and developed dynamic and responsive React components.",
+        "Led end-to-end implementation of multiple modules.",
+        "Collaborated closely with stakeholders for sprint planning, backlog grooming, and demo sessions.",
+        "Handled deployments and provided production support.",
+        "Performed code reviews, optimization, and testing using Jest with RTL.",
       ],
     },
     {
@@ -171,12 +158,12 @@ const resumeData = {
         "Jest with RTL",
       ],
       description:
-        "Binder is a B2B procurement platform that provides innovative business solutions and enables SMEs in controlling and optimizing their purchases through a trading ecosystem that directly links them with services and/or product suppliers.",
+        "Binder is a B2B procurement platform offering smart tools to manage business purchases by connecting buyers with suppliers through a digital ecosystem.",
       role: [
-        "Delivering a complete front-end application.",
-        "Ensuring high performance on mobile.",
-        "Writing tested, idiomatic, and documented JavaScript, HTML, and CSS.",
-        "Coordinating the workflow between teams.",
+        "Implemented front-end architecture using Next.js and Redux-toolkit.",
+        "Developed reusable and responsive UI components.",
+        "Collaborated with cross-functional teams across time zones.",
+        "Contributed to CI/CD pipeline and testing workflows.",
       ],
     },
     {
@@ -196,24 +183,26 @@ const resumeData = {
         "Redux-toolkit",
       ],
       description:
-        "This is a departure control system (DCS) that automates processing an airline's airport management operation, including managing information required for airport check-in, printing boarding cards, baggage acceptance, boarding, load control, and aircraft checks.",
+        "Departure control system for automating airport operations such as check-in, boarding, baggage handling, load control, and crew updates.",
       role: [
-        "Implemented a micro frontend architecture for a highly scalable project, supporting multiple frontends (web and mobile) using React, Next.js, and Redux.",
-        "Contributed to developing reusable components using React.js and Redux.",
-        "Delivering a complete micro frontend application and integrating it into the parent container.",
+        "Implemented micro frontend architecture with modular React apps.",
+        "Built highly performant, reusable components and integrated with API layers.",
+        "Maintained and enhanced production-ready features.",
+        "Handled state using Redux and Redux-thunk efficiently.",
       ],
     },
     {
       title: "K-Fabrik",
-      client: "Unknown",
+      client: "Internal/Confidential",
       tools: ["Next.js", "FastAPI", "PostgreSQL"],
       description:
-        "An AI-powered chatbot application built with a RAG framework, featuring document management, customizable prompts, user authentication, role-based access control, and integration with LLMs and vector databases, with PostgreSQL for data storage and Document Intelligence for smart document parsing.",
+        "An AI-powered chatbot platform built using the RAG (Retrieval-Augmented Generation) framework. It includes document management, intelligent chat flow, user role-based access, and vector database integration.",
       role: [
-        "Designed and developed responsive Next.js frontend components.",
-        "Integrated FastAPI backend with Next.js for seamless data flow.",
-        "Contributed to the implementation of user authentication and role-based access control.",
-        "Involved in document ingestion and retrieval system design.",
+        "Solo UI Developer: Led complete frontend development using Next.js.",
+        "Built modular and responsive UI components from scratch.",
+        "Integrated backend APIs using FastAPI with secure authentication.",
+        "Implemented document upload, ingestion pipeline, and smart document parsing using Document Intelligence.",
+        "Managed routing, protected routes, and role-based access control.",
       ],
     },
   ],
