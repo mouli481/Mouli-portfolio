@@ -77,7 +77,7 @@ export default function Home() {
           style={{ textAlign: "center", marginBottom: "2rem" }}
         >
          <Image
-  src="/my-photo.jpg"
+  src="/profile.jpg"
   alt="Mouli Reddy"
   width={150}
   height={150}
