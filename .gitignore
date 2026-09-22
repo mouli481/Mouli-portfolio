@@ -56,3 +56,6 @@ htmlcov/
 /playwright-report/
 /blob-report/
 /playwright/.cache/
+
+# dev-only visual QA screenshots
+/screenshots/

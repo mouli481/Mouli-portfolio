@@ -11,7 +11,13 @@ def create_app() -> FastAPI:
     configure_logging()
     settings = get_settings()
 
-    app = FastAPI(title="Mouli V Portfolio API", version="0.1.0")
+    app = FastAPI(
+        title="Mouli V Portfolio API",
+        version="0.1.0",
+        openapi_url=f"{settings.api_prefix}/openapi.json",
+        docs_url=f"{settings.api_prefix}/docs",
+        redoc_url=f"{settings.api_prefix}/redoc",
+    )
 
     app.add_middleware(
         CORSMiddleware,

@@ -15,7 +15,8 @@
     "test": "vitest run",
     "test:watch": "vitest",
     "test:e2e": "playwright test",
-    "check:comments": "node scripts/check-no-comments.mjs"
+    "check:comments": "node scripts/check-no-comments.mjs",
+    "generate:types": "node scripts/generate-api-types.mjs"
   },
   "dependencies": {
     "@hookform/resolvers": "^5.9.1",
