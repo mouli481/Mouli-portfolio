@@ -1,14 +1,16 @@
 import type { Metadata } from "next";
+import { pageMetadata } from "@/lib/metadata";
 import { Container } from "@/components/ui/container";
 import { PageHeader } from "@/components/ui/page-header";
 import { AiLabChat } from "@/features/chat/ai-lab-chat";
 import { AiLabSidebar } from "@/features/chat/ai-lab-sidebar";
 
-export const metadata: Metadata = {
+export const metadata: Metadata = pageMetadata({
   title: "AI Lab",
   description:
     "Chat with Mouli V's AI assistant: a RAG-powered chatbot that answers questions about his experience, projects and skills with cited sources.",
-};
+  path: "/ai-lab",
+});
 
 interface AiLabPageProps {
   searchParams: Promise<Record<string, string | string[] | undefined>>;

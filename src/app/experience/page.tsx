@@ -1,15 +1,17 @@
 import type { Metadata } from "next";
+import { pageMetadata } from "@/lib/metadata";
 import { getExperience, getProfile } from "@/lib/api/server";
 import { PageHeader } from "@/components/ui/page-header";
 import { Badge } from "@/components/ui/badge";
 import { ExperienceTimeline } from "@/features/experience/experience-timeline";
 import { CtaSection } from "@/features/home/cta-section";
 
-export const metadata: Metadata = {
+export const metadata: Metadata = pageMetadata({
   title: "Experience",
   description:
     "Mouli V's professional experience across ITC Infotech, Binder-sa and Onward Technologies, from enterprise RAG platforms to micro frontends.",
-};
+  path: "/experience",
+});
 
 export default async function ExperiencePage() {
   const [experience, profile] = await Promise.all([getExperience(), getProfile()]);

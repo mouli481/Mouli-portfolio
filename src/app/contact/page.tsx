@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { pageMetadata } from "@/lib/metadata";
 import { getProfile } from "@/lib/api/server";
 import { Container } from "@/components/ui/container";
 import { PageHeader } from "@/components/ui/page-header";
@@ -6,11 +7,12 @@ import { Reveal } from "@/components/motion/reveal";
 import { ContactChannels } from "@/features/contact/contact-channels";
 import { ContactForm } from "@/features/contact/contact-form";
 
-export const metadata: Metadata = {
+export const metadata: Metadata = pageMetadata({
   title: "Contact",
   description:
     "Get in touch with Mouli V about Generative AI, RAG, FastAPI or Next.js roles and projects.",
-};
+  path: "/contact",
+});
 
 export default async function ContactPage() {
   const profile = await getProfile();

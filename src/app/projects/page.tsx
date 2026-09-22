@@ -1,15 +1,17 @@
 import type { Metadata } from "next";
+import { pageMetadata } from "@/lib/metadata";
 import { getProfile, getProjects } from "@/lib/api/server";
 import { Container } from "@/components/ui/container";
 import { PageHeader } from "@/components/ui/page-header";
 import { ProjectsExplorer } from "@/features/projects/projects-explorer";
 import { CtaSection } from "@/features/home/cta-section";
 
-export const metadata: Metadata = {
+export const metadata: Metadata = pageMetadata({
   title: "Projects",
   description:
     "Case studies from Mouli V's work: enterprise RAG platforms, AI assistants, B2B frontends, micro frontends and cloud systems.",
-};
+  path: "/projects",
+});
 
 export default async function ProjectsPage() {
   const [projects, profile] = await Promise.all([getProjects(), getProfile()]);
