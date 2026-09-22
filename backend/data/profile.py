@@ -29,10 +29,12 @@ PROFILE = Profile(
         "working long after launch day.",
         "In 2023 I joined Binder remotely as a Frontend Engineer, shaping a B2B "
         "procurement platform with Next.js, TypeScript, Redux Toolkit and GraphQL.",
-        "Since 2024 at ITC Infotech I have been deep in Generative AI: building "
+        "I joined ITC Infotech in February 2024, starting on Cash Management / "
+        "DCS, a micro-frontend platform for FlyDubai. In May 2024 I moved onto "
         "K-Fabrik, an enterprise RAG chat platform on FastAPI, LangChain and "
-        "LangGraph, migrating 30+ AI agents from Streamlit to FastAPI and Next.js, "
-        "and moving workloads from Azure to AWS and GCP.",
+        "LangGraph, where I have been deep in Generative AI ever since: migrating "
+        "30+ AI agents from Streamlit to FastAPI and Next.js, and moving "
+        "workloads from Azure to AWS and GCP.",
         "Today I work where backend engineering, AI and frontend meet, and that "
         "is exactly where I like to be.",
     ],

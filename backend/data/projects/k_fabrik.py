@@ -10,7 +10,7 @@ K_FABRIK = ProjectDetail(
         "conversational interface."
     ),
     company="ITC Infotech",
-    period="2024 — Present",
+    period="May 2024 — Present",
     role="Senior Software Engineer",
     tech_stack=[
         "Python",

@@ -10,13 +10,17 @@ EXPERIENCE: list[ExperienceItem] = [
         end_date=None,
         is_current=True,
         summary=(
-            "Building K-Fabrik, an enterprise RAG-based AI chat platform, and "
-            "leading the migration of 30+ AI agents from Streamlit to a "
-            "FastAPI and Next.js stack."
+            "Joined in February 2024 on Cash Management / DCS, a micro-frontend "
+            "platform for FlyDubai, then moved in May 2024 onto K-Fabrik, an "
+            "enterprise RAG-based AI chat platform, leading the migration of 30+ "
+            "AI agents from Streamlit to a FastAPI and Next.js stack."
         ),
         achievements=[
-            "Architected an enterprise RAG chat platform using FastAPI, LangChain, "
-            "LangGraph, the AG-UI protocol and CopilotKit.",
+            "Feb 2024 — May 2024: contributed to Cash Management / DCS, a "
+            "micro-frontend platform built for FlyDubai.",
+            "May 2024 — Present: architected K-Fabrik, an enterprise RAG chat "
+            "platform, using FastAPI, LangChain, LangGraph, the AG-UI protocol "
+            "and CopilotKit.",
             "Migrated 30+ AI agents from Streamlit to a FastAPI + Next.js architecture.",
             "Led cloud migrations from Azure to AWS and from Azure to GCP.",
             "Built asynchronous agent workflows with Celery and Redis, backed by "
@@ -65,16 +69,13 @@ EXPERIENCE: list[ExperienceItem] = [
         end_date="2023-05",
         is_current=False,
         summary=(
-            "Delivered enterprise applications for Caterpillar and FlyDubai, "
-            "including a fleet management system and a micro-frontend cash "
-            "management platform."
+            "Delivered CAT Fleet Management, an enterprise fleet tracking "
+            "application built for Caterpillar."
         ),
         achievements=[
             "Contributed to CAT Fleet Management, an enterprise fleet tracking "
             "application built for Caterpillar.",
-            "Contributed to Cash Management / DCS, a micro-frontend platform "
-            "built for FlyDubai.",
         ],
-        tech_stack=["JavaScript", "TypeScript", "Micro Frontends"],
+        tech_stack=["AWS", "Docker", "Kubernetes", "Terraform"],
     ),
 ]
