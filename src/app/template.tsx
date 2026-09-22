@@ -5,7 +5,13 @@ import type { ReactNode } from "react";
 
 const variants = {
   hidden: { opacity: 0, filter: "blur(8px)", scale: 0.99, y: 8 },
-  visible: { opacity: 1, filter: "blur(0px)", scale: 1, y: 0 },
+  visible: {
+    opacity: 1,
+    filter: "blur(0px)",
+    scale: 1,
+    y: 0,
+    transitionEnd: { filter: "none", transform: "none" },
+  },
 };
 
 export default function Template({ children }: { children: ReactNode }) {
