@@ -3,8 +3,8 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "concurrently -n next,api -c blue,magenta \"next dev\" \"node scripts/run-backend.mjs\"",
-    "dev:next": "next dev",
+    "dev": "concurrently -n next,api -c blue,magenta \"next dev --turbopack\" \"node scripts/run-backend.mjs\"",
+    "dev:next": "next dev --turbopack",
     "dev:api": "node scripts/run-backend.mjs",
     "build": "next build",
     "start": "next start",

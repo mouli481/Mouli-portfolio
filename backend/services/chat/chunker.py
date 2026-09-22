@@ -36,6 +36,36 @@ def _profile_chunks() -> list[Chunk]:
             section="profile",
             content=f"{PROFILE.name}'s education: {education_lines}.",
         ),
+        Chunk(
+            id="profile-story",
+            title="Career story",
+            section="profile",
+            content=f"{PROFILE.name}'s career story: {' '.join(PROFILE.bio)}",
+        ),
+        Chunk(
+            id="profile-contact",
+            title="Contact details",
+            section="profile",
+            content=(
+                f"Contact {PROFILE.name} by email at {PROFILE.email} or by phone at "
+                f"{PROFILE.phone}. {PROFILE.name} is based in {PROFILE.location}. "
+                f"Currently: {PROFILE.currently}"
+            ),
+        ),
+        Chunk(
+            id="profile-focus",
+            title="What I do",
+            section="profile",
+            content=f"{PROFILE.name} focuses on: "
+            + " ".join(f"{area.title}: {area.description}" for area in PROFILE.focus_areas),
+        ),
+        Chunk(
+            id="profile-values",
+            title="Working values",
+            section="profile",
+            content=f"{PROFILE.name}'s working values: "
+            + " ".join(f"{value.title}: {value.description}" for value in PROFILE.values),
+        ),
     ]
 
 
@@ -72,10 +102,20 @@ def _project_chunks() -> list[Chunk]:
                 section="projects",
                 project_slug=project.slug,
                 content=(
-                    f"{project.title} is a {project.category} project. "
-                    f"Problem: {project.problem} Solution: {project.solution} "
-                    f"Technologies: {tech}."
+                    f"{project.title} is a {project.category} project built at "
+                    f"{project.company} ({project.period}) where the role was "
+                    f"{project.role}. Problem: {project.problem} "
+                    f"Solution: {project.solution} Technologies: {tech}."
                 ),
+            )
+        )
+        chunks.append(
+            Chunk(
+                id=f"project-{project.slug}-highlights",
+                title=f"{project.title} highlights",
+                section="projects",
+                project_slug=project.slug,
+                content=f"Highlights of {project.title}: {'; '.join(project.highlights)}.",
             )
         )
         if metrics:

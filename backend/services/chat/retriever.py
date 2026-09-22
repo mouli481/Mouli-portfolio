@@ -1,16 +1,18 @@
 import math
-import re
 from collections import Counter
 from dataclasses import dataclass
 from functools import lru_cache
 
 from backend.services.chat.chunker import Chunk, build_corpus
+from backend.services.chat.text import tokenize
 
-_TOKEN_PATTERN = re.compile(r"[a-z0-9]+(?:[.+#-][a-z0-9]+)*")
+TITLE_WEIGHT = 2
+
+__all__ = ["BM25Retriever", "ScoredChunk", "get_retriever", "tokenize"]
 
 
-def tokenize(text: str) -> list[str]:
-    return _TOKEN_PATTERN.findall(text.lower())
+def _document_tokens(chunk: Chunk) -> list[str]:
+    return tokenize(chunk.title) * TITLE_WEIGHT + tokenize(chunk.content)
 
 
 @dataclass(frozen=True)
@@ -24,7 +26,7 @@ class BM25Retriever:
         self._chunks = chunks
         self._k1 = k1
         self._b = b
-        self._tokenized = [tokenize(chunk.content) for chunk in chunks]
+        self._tokenized = [_document_tokens(chunk) for chunk in chunks]
         self._doc_lengths = [len(tokens) for tokens in self._tokenized]
         self._avg_doc_length = (
             sum(self._doc_lengths) / len(self._doc_lengths) if self._doc_lengths else 0.0

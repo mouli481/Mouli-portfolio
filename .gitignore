@@ -59,3 +59,6 @@ htmlcov/
 
 # dev-only visual QA screenshots
 /screenshots/
+
+# local-only QA scripts
+/.scratch/

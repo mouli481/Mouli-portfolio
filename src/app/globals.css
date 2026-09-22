@@ -59,6 +59,26 @@
   --radius-DEFAULT: var(--radius);
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
+  --animate-marquee: marquee 45s linear infinite;
+  --animate-shimmer: shimmer 6s linear infinite;
+
+  @keyframes marquee {
+    from {
+      transform: translateX(0);
+    }
+    to {
+      transform: translateX(-100%);
+    }
+  }
+
+  @keyframes shimmer {
+    from {
+      background-position: 0% 50%;
+    }
+    to {
+      background-position: 200% 50%;
+    }
+  }
 }
 
 * {
@@ -97,10 +117,37 @@ body {
 }
 
 .text-gradient {
-  background: linear-gradient(90deg, var(--primary), var(--accent));
+  background: linear-gradient(90deg, var(--primary), var(--accent), var(--primary));
+  background-size: 200% auto;
   -webkit-background-clip: text;
   background-clip: text;
   color: transparent;
+  animation: var(--animate-shimmer);
+}
+
+.skeleton-shimmer {
+  position: relative;
+  overflow: hidden;
+}
+
+.skeleton-shimmer::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  transform: translateX(-100%);
+  background: linear-gradient(
+    90deg,
+    transparent,
+    color-mix(in oklab, var(--foreground) 8%, transparent),
+    transparent
+  );
+  animation: skeleton-sweep 1.6s ease-in-out infinite;
+}
+
+@keyframes skeleton-sweep {
+  to {
+    transform: translateX(100%);
+  }
 }
 
 .grid-pattern {
@@ -131,4 +178,36 @@ body {
 ::selection {
   background: var(--primary);
   color: var(--primary-foreground);
+}
+
+@media print {
+  :root,
+  :root.light {
+    --background: #ffffff;
+    --foreground: #0a0a0f;
+    --muted-foreground: #3f3f46;
+    --primary: #1d4ed8;
+    --card: transparent;
+    --card-border: transparent;
+    --border: #e4e4e7;
+  }
+
+  html,
+  body {
+    color-scheme: light;
+    background: #ffffff !important;
+  }
+
+  .glass-card {
+    backdrop-filter: none;
+    -webkit-backdrop-filter: none;
+  }
+
+  nextjs-portal {
+    display: none !important;
+  }
+
+  @page {
+    margin: 14mm;
+  }
 }

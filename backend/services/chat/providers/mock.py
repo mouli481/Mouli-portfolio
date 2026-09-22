@@ -1,7 +1,27 @@
 import asyncio
+import re
 from collections.abc import AsyncIterator
 
 from backend.data.profile import PROFILE
+
+_SENTENCE_BOUNDARY = re.compile(r"(?<=[.!?])\s+")
+_SECTION_PATTERN = re.compile(r"^\[(?P<title>[^\]]+)\]\n(?P<body>.+)$", re.DOTALL)
+MAX_SECTIONS = 2
+SENTENCES_PER_SECTION = 2
+
+
+def _parse_sections(context_block: str) -> list[tuple[str, str]]:
+    sections: list[tuple[str, str]] = []
+    for raw in context_block.split("\n\n"):
+        match = _SECTION_PATTERN.match(raw.strip())
+        if match:
+            sections.append((match.group("title"), match.group("body").strip()))
+    return sections
+
+
+def _summarize(body: str) -> str:
+    sentences = _SENTENCE_BOUNDARY.split(body)
+    return " ".join(sentences[:SENTENCES_PER_SECTION])
 
 
 class MockChatProvider:
@@ -13,25 +33,25 @@ class MockChatProvider:
         response = self._compose_response(user_message, context_block)
         for word in response.split(" "):
             yield f"{word} "
-            await asyncio.sleep(0.02)
+            await asyncio.sleep(0.015)
 
     def _compose_response(self, user_message: str, context_block: str) -> str:
         if not user_message.strip():
             return (
                 f"Hi, I'm the AI assistant for {PROFILE.name}'s portfolio. "
-                "Ask me about their experience, projects or skills."
+                "Ask me about his experience, projects or skills."
             )
 
-        if context_block and "No relevant context" not in context_block:
-            first_section = context_block.split("\n\n", 1)[0]
-            snippet = first_section.split("\n", 1)[-1].strip()
+        sections = _parse_sections(context_block)[:MAX_SECTIONS]
+        if not sections:
             return (
-                f"Based on {PROFILE.name}'s portfolio: {snippet} "
-                "Ask a follow-up question if you'd like more detail."
+                f"I don't have information about that in {PROFILE.name}'s portfolio. "
+                "I can only answer questions about his experience, projects and skills, "
+                "so try asking about one of those."
             )
 
+        bullets = "\n".join(f"- **{title}:** {_summarize(body)}" for title, body in sections)
         return (
-            f"I don't have specific information about that in {PROFILE.name}'s "
-            "portfolio yet. Try asking about their experience, projects or "
-            "technical skills instead."
+            f"Here's what I found in {PROFILE.name}'s portfolio:\n\n{bullets}\n\n"
+            "Ask a follow-up question if you'd like more detail."
         )

@@ -13,7 +13,7 @@ export function SiteHeader() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   return (
-    <header className="glass-card sticky top-0 z-40 border-x-0 border-t-0">
+    <header className="glass-card sticky top-0 z-40 border-x-0 border-t-0 print:hidden">
       <div className="mx-auto flex h-16 max-w-6xl items-center justify-between px-4 sm:px-6">
         <Link
           href="/"

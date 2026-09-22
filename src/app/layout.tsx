@@ -7,6 +7,7 @@ import { ScrollProgress } from "@/components/layout/scroll-progress";
 import { SiteHeader } from "@/components/layout/site-header";
 import { SiteFooter } from "@/components/layout/site-footer";
 import { CustomCursor } from "@/components/layout/custom-cursor";
+import { FloatingChatWidget } from "@/features/chat/floating-chat-widget";
 import { SITE_CONFIG } from "@/lib/site-config";
 
 const geistSans = Geist({
@@ -96,7 +97,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
         <AppProviders>
           <a
             href="#main-content"
-            className="focus-ring bg-primary text-primary-foreground fixed top-2 left-2 z-[100] -translate-y-16 rounded-md px-4 py-2 text-sm font-medium transition-transform focus:translate-y-0"
+            className="focus-ring bg-primary text-primary-foreground sr-only rounded-md px-4 py-2 text-sm font-medium focus:not-sr-only focus:fixed focus:top-3 focus:left-3 focus:z-[100]"
           >
             Skip to content
           </a>
@@ -108,6 +109,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
             {children}
           </main>
           <SiteFooter />
+          <FloatingChatWidget />
         </AppProviders>
       </body>
     </html>

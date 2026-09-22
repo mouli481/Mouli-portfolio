@@ -11,6 +11,7 @@ const EXCLUDED_DIRS = new Set([
   "__pycache__",
   "playwright-report",
   "test-results",
+  ".scratch",
 ]);
 
 const TS_EXTENSIONS = new Set([".ts", ".tsx"]);
@@ -36,27 +37,36 @@ function collectFiles(root, extensions) {
 
 function findCommentViolations(filePath) {
   const source = readFileSync(filePath, "utf-8");
-  const scanner = ts.createScanner(
+  const sourceFile = ts.createSourceFile(
+    filePath,
+    source,
     ts.ScriptTarget.Latest,
-    false,
-    filePath.endsWith(".tsx") ? ts.LanguageVariant.JSX : ts.LanguageVariant.Standard,
-    source
+    true,
+    filePath.endsWith(".tsx") ? ts.ScriptKind.TSX : ts.ScriptKind.TS
   );
+  const commentPositions = new Set();
 
-  const violations = [];
-  let token = scanner.scan();
-  while (token !== ts.SyntaxKind.EndOfFileToken) {
-    if (
-      token === ts.SyntaxKind.SingleLineCommentTrivia ||
-      token === ts.SyntaxKind.MultiLineCommentTrivia
-    ) {
-      const start = scanner.getTokenPos();
-      const line = source.slice(0, start).split("\n").length;
-      violations.push(`${filePath}:${line}: comment found`);
+  const visit = (node) => {
+    if (node.kind === ts.SyntaxKind.JsxText) {
+      return;
     }
-    token = scanner.scan();
-  }
-  return violations;
+    const ranges = [
+      ...(ts.getLeadingCommentRanges(source, node.pos) ?? []),
+      ...(ts.getTrailingCommentRanges(source, node.pos) ?? []),
+    ];
+    for (const range of ranges) {
+      commentPositions.add(range.pos);
+    }
+    for (const child of node.getChildren(sourceFile)) {
+      visit(child);
+    }
+  };
+  visit(sourceFile);
+
+  return [...commentPositions].map((position) => {
+    const { line } = sourceFile.getLineAndCharacterOfPosition(position);
+    return `${filePath}:${line + 1}: comment found`;
+  });
 }
 
 function checkTypeScriptFiles(root) {

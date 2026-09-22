@@ -51,6 +51,12 @@ export interface ContactResponse {
   message: string;
 }
 
+export interface CoreValue {
+  title: string;
+  description: string;
+  icon: string;
+}
+
 export interface EducationItem {
   institution: string;
   degree: string;
@@ -71,6 +77,12 @@ export interface ExperienceItem {
   tech_stack: string[];
 }
 
+export interface FocusArea {
+  title: string;
+  description: string;
+  icon: string;
+}
+
 export interface ImpactMetric {
   label: string;
   value: string;
@@ -79,13 +91,19 @@ export interface ImpactMetric {
 export interface Profile {
   name: string;
   title: string;
+  tagline: string;
+  roles: string[];
   location: string;
   email: string;
   phone: string;
   summary: string;
+  bio: string[];
+  currently: string;
   years_experience: number;
   education: EducationItem[];
   social_links: SocialLink[];
+  focus_areas: FocusArea[];
+  values: CoreValue[];
 }
 
 export interface ProjectDetail {
@@ -93,7 +111,11 @@ export interface ProjectDetail {
   title: string;
   category: "genai" | "full-stack" | "frontend" | "cloud";
   summary: string;
+  company: string;
+  period: string;
+  role: string;
   tech_stack: string[];
+  highlights: string[];
   featured: boolean;
   problem: string;
   solution: string;
@@ -107,7 +129,11 @@ export interface ProjectSummary {
   title: string;
   category: "genai" | "full-stack" | "frontend" | "cloud";
   summary: string;
+  company: string;
+  period: string;
+  role: string;
   tech_stack: string[];
+  highlights: string[];
   featured: boolean;
 }
 

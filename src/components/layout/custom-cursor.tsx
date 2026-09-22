@@ -42,7 +42,7 @@ export function CustomCursor() {
   return (
     <motion.div
       aria-hidden="true"
-      className="border-primary/60 bg-primary/10 pointer-events-none fixed top-0 left-0 z-[60] rounded-full border mix-blend-difference"
+      className="border-primary/60 bg-primary/10 pointer-events-none fixed top-0 left-0 z-[60] rounded-full border mix-blend-difference print:hidden"
       style={{
         x: springX,
         y: springY,

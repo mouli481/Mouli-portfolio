@@ -28,7 +28,11 @@ class ProjectSummary(BaseModel):
     title: str
     category: ProjectCategory
     summary: str
+    company: str
+    period: str
+    role: str
     tech_stack: list[str]
+    highlights: list[str]
     featured: bool
 
 
