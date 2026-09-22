@@ -1,5 +1,5 @@
 export type ChatEventType =
-  "RUN_STARTED" | "TEXT_MESSAGE_CONTENT" | "SOURCES" | "RUN_FINISHED" | "RUN_ERROR";
+  "RUN_STARTED" | "RETRIEVAL" | "TEXT_MESSAGE_CONTENT" | "SOURCES" | "RUN_FINISHED" | "RUN_ERROR";
 
 export interface ChatSource {
   title: string;
@@ -7,11 +7,20 @@ export interface ChatSource {
   snippet: string;
 }
 
+export interface RetrievalCandidate {
+  id: string;
+  title: string;
+  section: string;
+  relevance: number;
+  selected: boolean;
+}
+
 export interface ChatStreamEvent {
   type: ChatEventType;
   runId?: string;
   delta?: string;
   sources?: ChatSource[];
+  candidates?: RetrievalCandidate[];
   message?: string;
 }
 

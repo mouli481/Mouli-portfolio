@@ -94,6 +94,7 @@ async function main() {
   const header =
     "export type ChatEventType =\n" +
     '  | "RUN_STARTED"\n' +
+    '  | "RETRIEVAL"\n' +
     '  | "TEXT_MESSAGE_CONTENT"\n' +
     '  | "SOURCES"\n' +
     '  | "RUN_FINISHED"\n' +
@@ -103,11 +104,19 @@ async function main() {
     "  section: string;\n" +
     "  snippet: string;\n" +
     "}\n\n" +
+    "export interface RetrievalCandidate {\n" +
+    "  id: string;\n" +
+    "  title: string;\n" +
+    "  section: string;\n" +
+    "  relevance: number;\n" +
+    "  selected: boolean;\n" +
+    "}\n\n" +
     "export interface ChatStreamEvent {\n" +
     "  type: ChatEventType;\n" +
     "  runId?: string;\n" +
     "  delta?: string;\n" +
     "  sources?: ChatSource[];\n" +
+    "  candidates?: RetrievalCandidate[];\n" +
     "  message?: string;\n" +
     "}\n\n";
 

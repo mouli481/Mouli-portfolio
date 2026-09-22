@@ -2,6 +2,7 @@ import type { ChatEventType, ChatStreamEvent } from "@/types/api";
 
 const EVENT_TYPES: ReadonlySet<ChatEventType> = new Set<ChatEventType>([
   "RUN_STARTED",
+  "RETRIEVAL",
   "TEXT_MESSAGE_CONTENT",
   "SOURCES",
   "RUN_FINISHED",

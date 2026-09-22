@@ -49,8 +49,22 @@ export function useChat() {
       const assistantId = createId();
       setMessages((current) => [
         ...current,
-        { id: createId(), role: "user", content, sources: [], status: "done" },
-        { id: assistantId, role: "assistant", content: "", sources: [], status: "streaming" },
+        {
+          id: createId(),
+          role: "user",
+          content,
+          sources: [],
+          candidates: [],
+          status: "done",
+        },
+        {
+          id: assistantId,
+          role: "assistant",
+          content: "",
+          sources: [],
+          candidates: [],
+          status: "streaming",
+        },
       ]);
 
       const controller = new AbortController();
@@ -67,6 +81,9 @@ export function useChat() {
         } else if (event.type === "SOURCES" && event.sources) {
           const sources = event.sources;
           updateMessage(assistantId, (message) => ({ ...message, sources }));
+        } else if (event.type === "RETRIEVAL" && event.candidates) {
+          const candidates = event.candidates;
+          updateMessage(assistantId, (message) => ({ ...message, candidates }));
         } else if (event.type === "RUN_ERROR") {
           const errorText = event.message ?? "Something went wrong.";
           updateMessage(assistantId, (message) => ({

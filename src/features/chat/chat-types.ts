@@ -1,4 +1,4 @@
-import type { ChatSource } from "@/types/api";
+import type { ChatSource, RetrievalCandidate } from "@/types/api";
 
 export type ChatMessageStatus = "streaming" | "done" | "error";
 
@@ -7,6 +7,7 @@ export interface ConversationMessage {
   role: "user" | "assistant";
   content: string;
   sources: ChatSource[];
+  candidates: RetrievalCandidate[];
   status: ChatMessageStatus;
 }
 

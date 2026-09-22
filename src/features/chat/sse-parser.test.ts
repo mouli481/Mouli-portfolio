@@ -30,4 +30,16 @@ describe("parseSseChunk", () => {
 
     expect(result.events).toEqual([]);
   });
+
+  it("parses a RETRIEVAL event with candidate chunks", () => {
+    const buffer =
+      'data: {"type": "RETRIEVAL", "candidates": [{"id": "a", "title": "Profile", ' +
+      '"section": "profile", "relevance": 100, "selected": true}]}\n\n';
+
+    const result = parseSseChunk(buffer);
+
+    expect(result.events).toHaveLength(1);
+    expect(result.events[0]?.type).toBe("RETRIEVAL");
+    expect(result.events[0]?.candidates?.[0]?.relevance).toBe(100);
+  });
 });

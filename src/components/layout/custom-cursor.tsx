@@ -5,11 +5,15 @@ import { motion, useMotionValue, useSpring } from "motion/react";
 import { useReducedMotion } from "@/hooks/use-reduced-motion";
 
 const INTERACTIVE_SELECTOR = 'a, button, [role="button"], input, textarea, select';
+const LABEL_SELECTOR = "[data-cursor]";
+const BASE_SIZE = 20;
+const HOVER_SIZE = 56;
 
 export function CustomCursor() {
   const prefersReducedMotion = useReducedMotion();
   const [isEnabled, setIsEnabled] = useState(false);
   const [isHoveringInteractive, setIsHoveringInteractive] = useState(false);
+  const [label, setLabel] = useState<string | null>(null);
 
   const cursorX = useMotionValue(-100);
   const cursorY = useMotionValue(-100);
@@ -29,6 +33,8 @@ export function CustomCursor() {
       cursorY.set(event.clientY);
       const target = event.target;
       if (target instanceof Element) {
+        const labelled = target.closest(LABEL_SELECTOR);
+        setLabel(labelled?.getAttribute("data-cursor") ?? null);
         setIsHoveringInteractive(Boolean(target.closest(INTERACTIVE_SELECTOR)));
       }
     };
@@ -39,10 +45,12 @@ export function CustomCursor() {
 
   if (!isEnabled) return null;
 
+  const isExpanded = isHoveringInteractive || Boolean(label);
+
   return (
     <motion.div
       aria-hidden="true"
-      className="border-primary/60 bg-primary/10 pointer-events-none fixed top-0 left-0 z-[60] rounded-full border mix-blend-difference print:hidden"
+      className="border-primary/60 bg-primary/10 pointer-events-none fixed top-0 left-0 z-[60] flex items-center justify-center overflow-hidden rounded-full border whitespace-nowrap mix-blend-difference print:hidden"
       style={{
         x: springX,
         y: springY,
@@ -50,10 +58,22 @@ export function CustomCursor() {
         translateY: "-50%",
       }}
       animate={{
-        width: isHoveringInteractive ? 56 : 20,
-        height: isHoveringInteractive ? 56 : 20,
+        width: label ? "auto" : isExpanded ? HOVER_SIZE : BASE_SIZE,
+        height: isExpanded ? HOVER_SIZE : BASE_SIZE,
+        paddingLeft: label ? 18 : 0,
+        paddingRight: label ? 18 : 0,
       }}
       transition={{ duration: 0.2 }}
-    />
+    >
+      {label ? (
+        <motion.span
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          className="text-[11px] font-semibold tracking-wide text-white uppercase"
+        >
+          {label}
+        </motion.span>
+      ) : null}
+    </motion.div>
   );
 }

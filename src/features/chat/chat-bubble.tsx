@@ -3,6 +3,7 @@ import { motion } from "motion/react";
 import type { ConversationMessage } from "@/features/chat/chat-types";
 import { CopyButton } from "@/features/chat/copy-button";
 import { FormattedText } from "@/features/chat/formatted-text";
+import { RetrievalTrace } from "@/features/chat/retrieval-trace";
 import { SourceChips } from "@/features/chat/source-chips";
 import { TypingIndicator } from "@/features/chat/typing-indicator";
 import { cn } from "@/lib/utils";
@@ -29,6 +30,12 @@ export function ChatBubble({ message }: { message: ConversationMessage }) {
       </span>
       <div className={cn("flex max-w-[85%] flex-col gap-2", isUser && "items-end")}>
         <span className="sr-only">{isUser ? "You said:" : "Assistant said:"}</span>
+        {!isUser && message.candidates.length > 0 ? (
+          <RetrievalTrace
+            candidates={message.candidates}
+            hasAnswerStarted={message.content.length > 0}
+          />
+        ) : null}
         <div
           className={cn(
             "rounded-2xl px-4 py-3 text-sm leading-relaxed",

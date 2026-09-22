@@ -3,14 +3,16 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useState } from "react";
-import { Menu, X } from "lucide-react";
+import { Menu, Search, X } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { NAV_LINKS } from "@/components/layout/nav-links";
 import { ThemeToggle } from "@/components/layout/theme-toggle";
+import { useCommandMenu } from "@/features/command-menu/command-menu-context";
 
 export function SiteHeader() {
   const pathname = usePathname();
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const { open: openCommandMenu } = useCommandMenu();
 
   return (
     <header className="glass-card sticky top-0 z-40 border-x-0 border-t-0 print:hidden">
@@ -50,6 +52,18 @@ export function SiteHeader() {
         </nav>
 
         <div className="flex items-center gap-2">
+          <button
+            type="button"
+            onClick={openCommandMenu}
+            aria-label="Open command menu"
+            className="focus-ring border-border text-muted-foreground hover:border-primary/50 hover:text-foreground hidden items-center gap-2 rounded-full border px-3 py-1.5 text-xs transition-colors sm:flex"
+          >
+            <Search className="h-3.5 w-3.5" aria-hidden="true" />
+            <span>Search</span>
+            <kbd className="border-border bg-foreground/5 rounded border px-1.5 py-0.5 font-mono text-[10px]">
+              ⌘K
+            </kbd>
+          </button>
           <ThemeToggle className="hidden sm:flex" />
           <button
             type="button"
@@ -92,8 +106,19 @@ export function SiteHeader() {
                 </li>
               );
             })}
-            <li className="px-3 pt-2">
+            <li className="flex items-center gap-2 px-3 pt-2">
               <ThemeToggle />
+              <button
+                type="button"
+                onClick={() => {
+                  setIsMenuOpen(false);
+                  openCommandMenu();
+                }}
+                className="focus-ring border-border text-muted-foreground hover:text-foreground flex h-9 flex-1 items-center justify-center gap-2 rounded-full border text-sm transition-colors"
+              >
+                <Search className="h-3.5 w-3.5" aria-hidden="true" />
+                Search
+              </button>
             </li>
           </ul>
         </nav>

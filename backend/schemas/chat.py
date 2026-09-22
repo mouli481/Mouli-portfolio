@@ -20,3 +20,11 @@ class ChatSource(BaseModel):
     title: str
     section: str
     snippet: str
+
+
+class RetrievalCandidate(BaseModel):
+    id: str
+    title: str
+    section: str
+    relevance: int
+    selected: bool

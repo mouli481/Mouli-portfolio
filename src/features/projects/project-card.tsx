@@ -19,6 +19,7 @@ export function ProjectCard({ project, size = "default", className }: ProjectCar
     <SpotlightCard className={cn("h-full", className)}>
       <Link
         href={`/projects/${project.slug}`}
+        data-cursor="View"
         className="focus-ring flex h-full flex-col gap-5 rounded-3xl p-6 sm:p-8"
       >
         <div

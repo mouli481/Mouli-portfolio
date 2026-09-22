@@ -72,6 +72,7 @@ export function FloatingChatWidget() {
         aria-expanded={isOpen}
         aria-controls="chat-widget-panel"
         aria-label={isOpen ? "Close AI assistant" : "Open AI assistant"}
+        data-cursor={isOpen ? undefined : "Ask"}
         className="focus-ring from-primary to-accent relative flex h-14 w-14 items-center justify-center rounded-full bg-gradient-to-br text-white shadow-[0_10px_40px_-10px_var(--primary)] transition-transform hover:scale-105"
       >
         {!isOpen ? (
